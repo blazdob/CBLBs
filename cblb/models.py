@@ -1476,6 +1476,9 @@ def yes_model_ODE(T, state, params):
 def MUX_4_1_model_ODE(T, state, params):
     return MUX_4_1_model(state, T, params)
 
+def MUX_8_1_model_ODE(T, state, params):
+    return MUX_8_1_model(state, T, params)    
+
 def CLB_model_ODE(T, state, params):
     return CLB_model(state, T, params)
 
