@@ -1451,7 +1451,7 @@ def CLB_model_8(state, T, params):
     state_toggle_I6 = I6_L_A, I6_L_B, I6_a, I6_b, I6_N_a, I6_N_b
 
     # latch I7
-    I7_L_A, I7_L_B, I7_a, I7_b, I7_N_a, I7_N_b = state[42:36]
+    I7_L_A, I7_L_B, I7_a, I7_b, I7_N_a, I7_N_b = state[42:48]
     state_toggle_I7 = I7_L_A, I7_L_B, I7_a, I7_b, I7_N_a, I7_N_b
 
 
@@ -1477,7 +1477,7 @@ def CLB_model_8(state, T, params):
 
     # state
     I0, I1, I2, I3, I4, I5, I6, I7 = I0_a, I1_a, I2_a, I3_a, I4_a, I5_a, I6_a, I7_a
-    state_mux = np.append([I0, I1, I2, I3, I4, I5, I6, I7], state[36:], axis=0)
+    state_mux = np.append([I0, I1, I2, I3, I4, I5, I6, I7], state[48:], axis=0)
 
     # model
     dstate_mux = MUX_8_1_model(state_mux, T, params_mux)
