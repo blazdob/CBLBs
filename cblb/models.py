@@ -417,16 +417,16 @@ def MUX_8_1_model(state, T, params):
 
     I0, I1, I2, I3, I4, I5, I6, I7, S0, S1, S2 = state[:11]
     I0_out, I1_out, I2_out, I3_out, I4_out, I5_out, I6_out, I7_out = state[11:19]
-    L_I0_I0, L_I1_S2, L_I1_I1, L_I2_S1, L_I2_I2, L_I3_S1, L_I3_S2, L_I3_I3, L_I4_S0, L_I4_I4, L_I5_S0, L_I5_S2, L_I5_I5, L_I6_S0, L_I6_S1, L_I6_I6, L_I7_S0, L_I7_S1, L_I7_S2, L_I7_I7,
-    L_I0, L_I1, L_I2, L_I3, L_I4, L_I5, L_I6, L_I7 = state[19:47]
-    N_I0_S0, N_I0_S1, N_I0_S2, N_I0_I0,
-    N_I1_S0, N_I1_S1, N_I1_S2, N_I1_I1,
-    N_I2_S0, N_I2_S1, N_I2_S2, N_I2_I2,
-    N_I3_S0, N_I3_S1, N_I3_S2, N_I3_I3,
-    N_I4_S0, N_I4_S1, N_I4_S2, N_I4_I4,
-    N_I5_S0, N_I5_S1, N_I5_S2, N_I5_I5,
-    N_I6_S0, N_I6_S1, N_I6_S2, N_I6_I6,
-    N_I7_S0, N_I7_S1, N_I7_S2, N_I7_I7,
+    L_I0_I0, L_I1_S2, L_I1_I1, L_I2_S1, L_I2_I2, L_I3_S1, L_I3_S2, L_I3_I3, L_I4_S0, L_I4_I4, L_I5_S0, L_I5_S2, L_I5_I5, L_I6_S0, L_I6_S1, L_I6_I6, L_I7_S0,\
+    L_I7_S1, L_I7_S2, L_I7_I7,L_I0, L_I1, L_I2, L_I3, L_I4, L_I5, L_I6, L_I7 = state[19:47]
+    N_I0_S0, N_I0_S1, N_I0_S2, N_I0_I0,\
+    N_I1_S0, N_I1_S1, N_I1_S2, N_I1_I1,\
+    N_I2_S0, N_I2_S1, N_I2_S2, N_I2_I2,\
+    N_I3_S0, N_I3_S1, N_I3_S2, N_I3_I3,\
+    N_I4_S0, N_I4_S1, N_I4_S2, N_I4_I4,\
+    N_I5_S0, N_I5_S1, N_I5_S2, N_I5_I5,\
+    N_I6_S0, N_I6_S1, N_I6_S2, N_I6_I6,\
+    N_I7_S0, N_I7_S1, N_I7_S2, N_I7_I7,\
     N_I0, N_I1, N_I2, N_I3, N_I4, N_I5, N_I6, N_I7 = state[47:87]
     out = state[87]
     
