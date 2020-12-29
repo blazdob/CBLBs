@@ -1339,7 +1339,7 @@ def MUX_8_1_model_stochastic(state, params, Omega):
     p_I1_S1 = yes_cell_stochastic(state_yes_I1_S1, params_yes, Omega)
 
     # not S2: I1_S2
-    state_not_I1_S2 = I1_out, S2, N_I1_S2, N_I1_S2
+    state_not_I1_S2 = L_I1_S2, I1_out, S2, N_I1_S2, N_I1_S2
     p_I1_S2 = not_cell_stochastic(state_not_I1_S2, params_not, Omega)    
     
     # not I1: I1_I1
@@ -1354,7 +1354,7 @@ def MUX_8_1_model_stochastic(state, params, Omega):
     p_I2_S0 = yes_cell_stochastic(state_yes_I2_S0, params_yes, Omega)
     
     # not S1: I2_S1
-    state_not_I2_S1 = I2_out, S1, N_I2_S1, N_I2_S1
+    state_not_I2_S1 = L_I2_S1, I2_out, S1, N_I2_S1, N_I2_S1
     p_I2_S1 = not_cell_stochastic(state_not_I2_S1, params_not, Omega)    
     
     # yes S2: I2_S2
@@ -1374,11 +1374,11 @@ def MUX_8_1_model_stochastic(state, params, Omega):
     
     
     # not S1: I3_S1
-    state_not_I3_S1 = I3_out, S1, N_I3_S1, N_I3_S1
+    state_not_I3_S1 = L_I3_S1, I3_out, S1, N_I3_S1, N_I3_S1
     p_I3_S1 = not_cell_stochastic(state_not_I3_S1, params_not, Omega)    
     
      # not S2: I3_S2
-    state_not_I3_S2 = I3_out, S2, N_I3_S2, N_I3_S2
+    state_not_I3_S2 = L_I3_S2, I3_out, S2, N_I3_S2, N_I3_S2
     p_I3_S2 = not_cell_stochastic(state_not_I3_S2, params_not, Omega)    
     
     # not I3: I3_I3
@@ -1389,7 +1389,7 @@ def MUX_8_1_model_stochastic(state, params, Omega):
      I4
     """
     # not S0: I4_S0
-    state_not_I4_S0 = I4_out, S0, N_I4_S0, N_I4_S0
+    state_not_I4_S0 = L_I4_S0, I4_out, S0, N_I4_S0, N_I4_S0
     p_I4_S0 = not_cell_stochastic(state_not_I4_S0, params_not, Omega)    
     
 
@@ -1411,7 +1411,7 @@ def MUX_8_1_model_stochastic(state, params, Omega):
      I5
     """
     # not S0: I5_S0
-    state_not_I5_S0 = I5_out, S0, N_I5_S0, N_I5_S0
+    state_not_I5_S0 = L_I5_S0, I5_out, S0, N_I5_S0, N_I5_S0
     p_I5_S0 = not_cell_stochastic(state_not_I5_S0, params_not, Omega)    
     
     # yes S1: I5_S1
@@ -1419,7 +1419,7 @@ def MUX_8_1_model_stochastic(state, params, Omega):
     p_I5_S1 = yes_cell_stochastic(state_yes_I5_S1, params_yes, Omega)
 
     # not S2: I5_S2
-    state_not_I5_S2 = I5_out, S2, N_I5_S2, N_I5_S2
+    state_not_I5_S2 = L_I5_S2, I5_out, S2, N_I5_S2, N_I5_S2
     p_I5_S2 = not_cell_stochastic(state_not_I5_S2, params_not, Omega)    
 
     # not I5: I5_I5
@@ -1430,12 +1430,12 @@ def MUX_8_1_model_stochastic(state, params, Omega):
     I6
     """
     # not S0: I6_S0
-    state_not_I6_S0 = I6_out, S0, N_I6_S0, N_I6_S0
+    state_not_I6_S0 = L_I6_S0, I6_out, S0, N_I6_S0, N_I6_S0
     p_I6_S0 = not_cell_stochastic(state_not_I6_S0, params_not, Omega)    
     
 
     # not S1: I6_S1
-    state_not_I6_S1 = I6_out, S1, N_I6_S1, N_I6_S1
+    state_not_I6_S1 = L_I6_S1, I6_out, S1, N_I6_S1, N_I6_S1
     p_I6_S1 = not_cell_stochastic(state_not_I6_S1, params_not, Omega)    
     
 
@@ -1452,15 +1452,15 @@ def MUX_8_1_model_stochastic(state, params, Omega):
     I7
     """
     # not S0: I7_S0
-    state_not_I7_S0 = I7_out, S0, N_I7_S0, N_I7_S0
+    state_not_I7_S0 = L_I7_S0, I7_out, S0, N_I7_S0, N_I7_S0
     p_I7_S0 = not_cell_stochastic(state_not_I7_S0, params_not, Omega)    
 
     # not S1: I7_S1
-    state_not_I7_S1 = I7_out, S1, N_I7_S1, N_I7_S1
+    state_not_I7_S1 = L_I7_S1, I7_out, S1, N_I7_S1, N_I7_S1
     p_I7_S1 = not_cell_stochastic(state_not_I7_S1, params_not, Omega)    
 
      # not S2: I7_S2
-    state_not_I7_S2 = I7_out, S2, N_I7_S2, N_I7_S2
+    state_not_I7_S2 = L_I7_S2, I7_out, S2, N_I7_S2, N_I7_S2
     p_I7_S2 = not_cell_stochastic(state_not_I7_S2, params_not, Omega)    
 
     # not I7: I7_I7
