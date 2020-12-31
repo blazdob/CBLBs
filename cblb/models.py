@@ -1208,7 +1208,7 @@ def MUX_8_1_generate_stoichiometry():
     # x axis ... species
     # y axis ... reactions
     #
-    N = np.zeros((88, 164))
+    N = np.zeros((88, 176))
 
     """
     # yes S0: I0_S0
