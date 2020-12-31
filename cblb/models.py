@@ -1171,6 +1171,1062 @@ def MUX_4_1_generate_stoichiometry():
 
     return N
 
+
+def MUX_8_1_generate_stoichiometry():
+    """
+    I0, I1, I2, I3, I4, I5, I6, I7, S0, S1, S2 = state[:11]
+    I0_out, I1_out, I2_out, I3_out, I4_out, I5_out, I6_out, I7_out = state[11:19]
+    L_I0_I0, L_I1_S2, L_I1_I1, L_I2_S1,\
+    L_I2_I2, L_I3_S1, L_I3_S2, L_I3_I3,\
+    L_I4_S0, L_I4_I4, L_I5_S0, L_I5_S2,\
+    L_I5_I5, L_I6_S0, L_I6_S1, L_I6_I6,\
+    L_I7_S0, L_I7_S1, L_I7_S2, L_I7_I7,\
+    L_I0, L_I1, L_I2, L_I3, L_I4, L_I5, L_I6, L_I7 = state[19:47]
+    N_I0_S0, N_I0_S1, N_I0_S2, N_I0_I0,\
+    N_I1_S0, N_I1_S1, N_I1_S2, N_I1_I1,\
+    N_I2_S0, N_I2_S1, N_I2_S2, N_I2_I2,\
+    N_I3_S0, N_I3_S1, N_I3_S2, N_I3_I3,\
+    N_I4_S0, N_I4_S1, N_I4_S2, N_I4_I4,\
+    N_I5_S0, N_I5_S1, N_I5_S2, N_I5_I5,\
+    N_I6_S0, N_I6_S1, N_I6_S2, N_I6_I6,\
+    N_I7_S0, N_I7_S1, N_I7_S2, N_I7_I7,\
+    N_I0, N_I1, N_I2, N_I3, N_I4, N_I5, N_I6, N_I7 = state[47:87]
+    out = state[87]
+    """
+    # I0, I1, I2, I3, I4, I5, I6, I7, S0, S1, S2 = range(11)
+    I0_out, I1_out, I2_out, I3_out, I4_out, I5_out, I6_out, I7_out = range(11, 19)
+    L_I0_I0, L_I1_S2, L_I1_I1, L_I2_S1, \
+    L_I2_I2, L_I3_S1, L_I3_S2, L_I3_I3, \
+    L_I4_S0, L_I4_I4, L_I5_S0, L_I5_S2, \
+    L_I5_I5, L_I6_S0, L_I6_S1, L_I6_I6, \
+    L_I7_S0, L_I7_S1, L_I7_S2, L_I7_I7, \
+    L_I0, L_I1, L_I2, L_I3, L_I4, L_I5, L_I6, L_I7 = range(19, 47)
+    #N_I0_S0, N_I0_S1, N_I0_S2, N_I0_I0, N_I1_S0, N_I1_S1, N_I1_S2, N_I1_I1, N_I2_S0, N_I2_S1, N_I2_S2, N_I2_I2, N_I3_S0, N_I3_S1, N_I3_S2, N_I3_I3,  N_I4_S0, N_I4_S1, N_I4_S2, N_I4_I4, N_I5_S0, N_I5_S1, N_I5_S2, N_I5_I5, N_I6_S0, N_I6_S1, N_I6_S2, N_I6_I6, N_I7_S0, N_I7_S1, N_I7_S2, N_I7_I7, N_I0, N_I1, N_I2, N_I3, N_I4, N_I5, N_I6, N_I7 = range(47,86)
+    out = 87
+
+    #
+    # x axis ... species
+    # y axis ... reactions
+    #
+    N = np.zeros((88, 164))
+
+    """
+    # yes S0: I0_S0
+    """
+    r = 0
+    # reaction 0
+    # 0 --> I0_out
+    N[I0_out, r] = 1
+
+    r += 1
+    # reaction 1
+    # I0_out --> 0
+    N[I0_out, r] = -1
+
+    r += 1
+    # reaction 2
+    # I0_out --> 0
+    N[I0_out, r] = -1
+
+    """
+    # yes S1: I0_S1 
+    """
+
+    r += 1
+    # reaction 3
+    # 0 --> I0_out
+    N[I0_out, r] = 1
+
+    r += 1
+    # reaction 4
+    # I0_out --> 0
+    N[I0_out, r] = -1
+
+    r += 1
+    # reaction 5
+    # I0_out --> 0
+    N[I0_out, r] = -1
+
+    """
+    # yes S2: I0_S2
+    """
+    r += 1
+    # 0 --> I0_out
+    N[I0_out, r] = 1
+
+    r += 1
+    # I0_out --> 0
+    N[I0_out, r] = -1
+
+    r += 1
+    # I0_out --> 0
+    N[I0_out, r] = -1
+
+    """
+    # not I0: I0_I0 
+    """
+
+    r += 1
+    # reaction 6
+    # 0 --> L_I0_I0
+    N[L_I0_I0, r] = 1
+
+    r += 1
+    # reaction 7
+    # L_I0_I0 --> 0
+    N[L_I0_I0, r] = -1
+
+    r += 1
+    # reaction 8
+    # 0 --> I0_out
+    N[I0_out, r] = 1
+
+    r += 1
+    # reaction 9
+    # I0_out --> 0
+    N[I0_out, r] = -1
+
+    r += 1
+    # reaction 10
+    # I0_out --> 0
+    N[I0_out, r] = -1
+
+    """
+    # yes S0: I1_S0
+    """
+    r += 1
+    # 0 --> I1_out
+    N[I1_out, r] = 1
+
+    r += 1
+    # I1_out --> 0
+    N[I1_out, r] = -1
+
+    r += 1
+    # I1_out --> 0
+    N[I1_out, r] = -1
+
+
+    """
+    # yes S1: I1_S1
+    """
+
+    r += 1
+    # reaction 16
+    # 0 --> I1_out
+    N[I1_out, r] = 1
+
+    r += 1
+    # reaction 17
+    # I1_out --> 0
+    N[I1_out, r] = -1
+
+    r += 1
+    # reaction 18
+    # I1_out --> 0
+    N[I1_out, r] = -1
+
+    """
+    # not S2: I1_S2
+    """
+    r += 1
+    N[L_I1_S2, r] = 1
+
+    r += 1
+    N[L_I1_S2, r] = -1
+
+    r += 1
+    N[I1_out, r] = 1
+
+    r += 1
+    N[I1_out, r] = -1
+
+    r += 1
+    N[I1_out, r] = -1
+
+    """
+    # not I1: I1_I1
+    """
+
+    r += 1
+    # reaction 19
+    # 0 --> L_I1_I1
+    N[L_I1_I1, r] = 1
+
+    r += 1
+    # reaction 20
+    # L_I1_I1 --> 0
+    N[L_I1_I1, r] = -1
+
+    r += 1
+    # reaction 21
+    # 0 --> I1_out
+    N[I1_out, r] = 1
+
+    r += 1
+    # reaction 22
+    # I1_out --> 0
+    N[I1_out, r] = -1
+
+    r += 1
+    # reaction 23
+    # I1_out --> 0
+    N[I1_out, r] = -1
+
+    """
+    # yes S0: I2_S0
+    """
+
+    r += 1
+    # reaction 24
+    # 0 --> I2_out
+    N[I2_out, r] = 1
+
+    r += 1
+    # reaction 25
+    # I2_out --> 0
+    N[I2_out, r] = -1
+
+    r += 1
+    # reaction 26
+    # I2_out --> 0
+    N[I2_out, r] = -1
+
+    """
+    # not S1: I2_S1
+    """
+
+    r += 1
+    # reaction 27
+    # 0 --> L_I2_S1
+    N[L_I2_S1, r] = 1
+
+    r += 1
+    # reaction 28
+    # L_I2_S1 --> 0
+    N[L_I2_S1, r] = -1
+
+    r += 1
+    # reaction 29
+    # 0 --> I2_out
+    N[I2_out, r] = 1
+
+    r += 1
+    # reaction 30
+    # I2_out --> 0
+    N[I2_out, r] = -1
+
+    r += 1
+    # reaction 31
+    # I2_out --> 0
+    N[I2_out, r] = -1
+
+    """
+    # yes S2: I1_S2 
+    """
+    r += 1
+    N[I2_out, r] = 1
+
+    r += 1
+    N[I2_out, r] = -1
+
+    r += 1
+    N[I2_out, r] = -1
+
+    """
+    # not I2: I2_I2
+    """
+
+    r += 1
+    # reaction 32
+    # 0 --> L_I2_I2
+    N[L_I2_I2, r] = 1
+
+    r += 1
+    # reaction 33
+    # L_I2_I2 --> 0
+    N[L_I2_I2, r] = -1
+
+    r += 1
+    # reaction 34
+    # 0 --> I2_out
+    N[I2_out, r] = 1
+
+    r += 1
+    # reaction 35
+    # I2_out --> 0
+    N[I2_out, r] = -1
+
+    r += 1
+    # reaction 36
+    # I2_out --> 0
+    N[I2_out, r] = -1
+
+    """ 
+    # yes S0: I3_S0
+    """
+
+    r += 1
+    # reaction 37
+    # 0 --> I3_out
+    N[I3_out, r] = 1
+
+    r += 1
+    # reaction 38
+    # I3_out --> 0
+    N[I3_out, r] = -1
+
+    r += 1
+    # reaction 39
+    # I3_out --> 0
+    N[I3_out, r] = -1
+
+
+    """
+    # not S1: I3_S1
+    """
+
+    r += 1
+    # reaction 42
+    # 0 --> L_I3_S1
+    N[L_I3_S1, r] = 1
+
+    r += 1
+    # reaction 43
+    # L_I3_S1 --> 0
+    N[L_I3_S1, r] = -1
+
+    r += 1
+    # reaction 44
+    # 0 --> I3_out
+    N[L_I3_S1, r] = 1
+
+    r += 1
+    # reaction 45
+    # I3_out --> 0
+    N[I3_out, r] = -1
+
+    r += 1
+    # reaction 46
+    # I3_out --> 0
+    N[I3_out, r] = -1
+
+    """
+    # not S2: I3_S2
+    """
+
+    r += 1
+    # reaction 42
+    # 0 --> L_I3_S2
+    N[L_I3_S1, r] = 1
+
+    r += 1
+    # reaction 43
+    # L_I3_S2 --> 0
+    N[L_I3_S1, r] = -1
+
+    r += 1
+    # reaction 44
+    # 0 --> I3_out
+    N[L_I3_S1, r] = 1
+
+    r += 1
+    # reaction 45
+    # I3_out --> 0
+    N[I3_out, r] = -1
+
+    r += 1
+    # reaction 46
+    # I3_out --> 0
+    N[I3_out, r] = -1
+
+    """
+    # not I3: I3_I3
+    """
+
+    r += 1
+    # reaction 47
+    # 0 --> L_I3_I3
+    N[L_I3_I3, r] = 1
+
+    r += 1
+    # reaction 48
+    # L_I3_I3 --> 0
+    N[L_I3_I3, r] = -1
+
+    r += 1
+    # reaction 49
+    # 0 --> I3_out
+    N[I3_out, r] = 1
+
+    r += 1
+    # reaction 50
+    # I3_out --> 0
+    N[I3_out, r] = -1
+
+    r += 1
+    # reaction 51
+    # I3_out --> 0
+    N[I3_out, r] = -1
+
+    """
+    # not S0: I4_S0
+    """
+
+    r += 1
+    # reaction 47
+    # 0 --> L_I4_S0
+    N[L_I4_S0, r] = 1
+
+    r += 1
+    # reaction 48
+    # L_I4_S0 --> 0
+    N[L_I4_S0, r] = -1
+
+    r += 1
+    # reaction 49
+    # 0 --> I4_out
+    N[I4_out, r] = 1
+
+    r += 1
+    # reaction 50
+    # I4_out --> 0
+    N[I4_out, r] = -1
+
+    r += 1
+    # reaction 51
+    # I4_out --> 0
+    N[I4_out, r] = -1
+
+    """ 
+    # yes S1: I4_S1
+    """
+
+    r += 1
+    # reaction 37
+    # 0 --> I4_out
+    N[I4_out, r] = 1
+
+    r += 1
+    # reaction 38
+    # I4_out --> 0
+    N[I4_out, r] = -1
+
+    r += 1
+    # reaction 39
+    # I4_out --> 0
+    N[I4_out, r] = -1
+
+    """ 
+    # yes S2: I4_S2
+    """
+
+    r += 1
+    # reaction 37
+    # 0 --> I4_out
+    N[I4_out, r] = 1
+
+    r += 1
+    # reaction 38
+    # I4_out --> 0
+    N[I4_out, r] = -1
+
+    r += 1
+    # reaction 39
+    # I4_out --> 0
+    N[I4_out, r] = -1
+
+    """
+    # not I4: I4_I4
+    """
+
+    r += 1
+    # reaction 47
+    # 0 --> L_I4_I4
+    N[L_I4_I4, r] = 1
+
+    r += 1
+    # reaction 48
+    # L_I4_I4 --> 0
+    N[L_I4_I4, r] = -1
+
+    r += 1
+    # reaction 49
+    # 0 --> I4_out
+    N[I4_out, r] = 1
+
+    r += 1
+    # reaction 50
+    # I4_out --> 0
+    N[I4_out, r] = -1
+
+    r += 1
+    # reaction 51
+    # I4_out --> 0
+    N[I4_out, r] = -1
+
+    """
+    # not S0: I5_S0
+    """
+
+    r += 1
+    # reaction 47
+    # 0 --> L_I5_S0
+    N[L_I5_S0, r] = 1
+
+    r += 1
+    # reaction 48
+    # L_I5_S0 --> 0
+    N[L_I5_S0, r] = -1
+
+    r += 1
+    # reaction 49
+    # 0 --> I5_out
+    N[I5_out, r] = 1
+
+    r += 1
+    # reaction 50
+    # I5_out --> 0
+    N[I5_out, r] = -1
+
+    r += 1
+    # reaction 51
+    # I5_out --> 0
+    N[I5_out, r] = -1
+
+    """ 
+    # yes S1: I5_S1
+    """
+
+    r += 1
+    # reaction 37
+    # 0 --> I5_out
+    N[I5_out, r] = 1
+
+    r += 1
+    # reaction 38
+    # I5_out --> 0
+    N[I5_out, r] = -1
+
+    r += 1
+    # reaction 39
+    # I5_out --> 0
+    N[I5_out, r] = -1
+
+    """
+    # not S2: I5_S2
+    """
+
+    r += 1
+    # reaction 47
+    # 0 --> L_I5_S2
+    N[L_I5_S2, r] = 1
+
+    r += 1
+    # reaction 48
+    # L_I5_S2 --> 0
+    N[L_I5_S2, r] = -1
+
+    r += 1
+    # reaction 49
+    # 0 --> I5_out
+    N[I5_out, r] = 1
+
+    r += 1
+    # reaction 50
+    # I5_out --> 0
+    N[I5_out, r] = -1
+
+    r += 1
+    # reaction 51
+    # I5_out --> 0
+    N[I5_out, r] = -1
+
+    """
+    # not I5: I5_I5
+    """
+
+    r += 1
+    # reaction 47
+    # 0 --> L_I5_I5
+    N[L_I5_I5, r] = 1
+
+    r += 1
+    # reaction 48
+    # L_I5_I5 --> 0
+    N[L_I5_I5, r] = -1
+
+    r += 1
+    # reaction 49
+    # 0 --> I5_out
+    N[I5_out, r] = 1
+
+    r += 1
+    # reaction 50
+    # I5_out --> 0
+    N[I5_out, r] = -1
+
+    r += 1
+    # reaction 51
+    # I5_out --> 0
+    N[I5_out, r] = -1
+
+    """
+    # not S0: I6_S0
+    """
+
+    r += 1
+    # reaction 47
+    # 0 --> L_I6_S0
+    N[L_I6_S0, r] = 1
+
+    r += 1
+    # reaction 48
+    # L_I6_S0 --> 0
+    N[L_I6_S0, r] = -1
+
+    r += 1
+    # reaction 49
+    # 0 --> I6_out
+    N[I6_out, r] = 1
+
+    r += 1
+    # reaction 50
+    # I6_out --> 0
+    N[I6_out, r] = -1
+
+    r += 1
+    # reaction 51
+    # I6_out --> 0
+    N[I6_out, r] = -1
+
+    """
+    # not S1: I6_S1
+    """
+
+    r += 1
+    # reaction 47
+    # 0 --> L_I6_S1
+    N[L_I6_S1, r] = 1
+
+    r += 1
+    # reaction 48
+    # L_I6_S1 --> 0
+    N[L_I6_S1, r] = -1
+
+    r += 1
+    # reaction 49
+    # 0 --> I6_out
+    N[I6_out, r] = 1
+
+    r += 1
+    # reaction 50
+    # I6_out --> 0
+    N[I6_out, r] = -1
+
+    r += 1
+    # reaction 51
+    # I6_out --> 0
+    N[I6_out, r] = -1
+
+    """ 
+    # yes S2: I6_S2
+    """
+
+    r += 1
+    # reaction 37
+    # 0 --> I6_out
+    N[I6_out, r] = 1
+
+    r += 1
+    # reaction 38
+    # I6_out --> 0
+    N[I6_out, r] = -1
+
+    r += 1
+    # reaction 39
+    # I6_out --> 0
+    N[I6_out, r] = -1
+
+    """
+    # not I6: I6_I6
+    """
+
+    r += 1
+    # reaction 47
+    # 0 --> L_I6_I6
+    N[L_I6_I6, r] = 1
+
+    r += 1
+    # reaction 48
+    # L_I6_I6 --> 0
+    N[L_I6_I6, r] = -1
+
+    r += 1
+    # reaction 49
+    # 0 --> I6_out
+    N[I6_out, r] = 1
+
+    r += 1
+    # reaction 50
+    # I6_out --> 0
+    N[I6_out, r] = -1
+
+    r += 1
+    # reaction 51
+    # I6_out --> 0
+    N[I6_out, r] = -1
+
+    """
+    # not S0: I7_S0
+    """
+
+    r += 1
+    # reaction 47
+    # 0 --> L_I7_S0
+    N[L_I7_S0, r] = 1
+
+    r += 1
+    # reaction 48
+    # L_I7_S0 --> 0
+    N[L_I7_S0, r] = -1
+
+    r += 1
+    # reaction 49
+    # 0 --> I7_out
+    N[I7_out, r] = 1
+
+    r += 1
+    # reaction 50
+    # I7_out --> 0
+    N[I7_out, r] = -1
+
+    r += 1
+    # reaction 51
+    # I7_out --> 0
+    N[I7_out, r] = -1
+
+    """
+    # not S1: I7_S1
+    """
+
+    r += 1
+    # reaction 47
+    # 0 --> L_I7_S1
+    N[L_I7_S1, r] = 1
+
+    r += 1
+    # reaction 48
+    # L_I7_S1 --> 0
+    N[L_I7_S1, r] = -1
+
+    r += 1
+    # reaction 49
+    # 0 --> I7_out
+    N[I7_out, r] = 1
+
+    r += 1
+    # reaction 50
+    # I7_out --> 0
+    N[I7_out, r] = -1
+
+    r += 1
+    # reaction 51
+    # I7_out --> 0
+    N[I7_out, r] = -1
+
+    """
+    # not S2: I7_S2
+    """
+
+    r += 1
+    # reaction 47
+    # 0 --> L_I7_S1
+    N[L_I7_S2, r] = 1
+
+    r += 1
+    # reaction 48
+    # L_I7_S1 --> 0
+    N[L_I7_S2, r] = -1
+
+    r += 1
+    # reaction 49
+    # 0 --> I7_out
+    N[I7_out, r] = 1
+
+    r += 1
+    # reaction 50
+    # I7_out --> 0
+    N[I7_out, r] = -1
+
+    r += 1
+    # reaction 51
+    # I7_out --> 0
+    N[I7_out, r] = -1
+
+    """
+    # not I7: I7_I7
+    """
+
+    r += 1
+    # reaction 47
+    # 0 --> L_I7_I7
+    N[L_I7_I7, r] = 1
+
+    r += 1
+    # reaction 48
+    # L_I7_I7 --> 0
+    N[L_I7_I7, r] = -1
+
+    r += 1
+    # reaction 49
+    # 0 --> I7_out
+    N[I7_out, r] = 1
+
+    r += 1
+    # reaction 50
+    # I7_out --> 0
+    N[I7_out, r] = -1
+
+    r += 1
+    # reaction 51
+    # I7_out --> 0
+    N[I7_out, r] = -1
+
+    """ 
+    # not I0: I0
+    """
+
+    r += 1
+    # reaction 52
+    # 0 --> L_I0
+    N[L_I0, r] = 1
+
+    r += 1
+    # reaction 53
+    # L_I0 --> 0
+    N[L_I0, r] = -1
+
+    r += 1
+    # reaction 54
+    # 0 --> out
+    N[out, r] = 1
+
+    r += 1
+    # reaction 55
+    # out --> 0
+    N[out, r] = -1
+
+    r += 1
+    # reaction 56
+    # out --> 0
+    N[out, r] = -1
+
+    """
+    # not I1: I1
+    """
+
+    r += 1
+    # reaction 57
+    # 0 --> L_I1
+    N[L_I1, r] = 1
+
+    r += 1
+    # reaction 58
+    # L_I1 --> 0
+    N[L_I1, r] = -1
+
+    r += 1
+    # reaction 59
+    # 0 --> out
+    N[out, r] = 1
+
+    r += 1
+    # reaction 60
+    # out --> 0
+    N[out, r] = -1
+
+    r += 1
+    # reaction 61
+    # out --> 0
+    N[out, r] = -1
+
+    """
+    # not I2: I2
+    """
+
+    r += 1
+    # reaction 62
+    # 0 --> L_I2
+    N[L_I2, r] = 1
+
+    r += 1
+    # reaction 63
+    # L_I2 --> 0
+    N[L_I2, r] = -1
+
+    r += 1
+    # reaction 64
+    # 0 --> out
+    N[out, r] = 1
+
+    r += 1
+    # reaction 65
+    # out --> 0
+    N[out, r] = -1
+
+    r += 1
+    # reaction 66
+    # out --> 0
+    N[out, r] = -1
+
+    """
+    # not I3: I3
+    """
+
+    r += 1
+    # reaction 67
+    # 0 --> L_I3
+    N[L_I3, r] = 1
+
+    r += 1
+    # reaction 68
+    # L_I3 --> 0
+    N[L_I3, r] = -1
+
+    r += 1
+    # reaction 69
+    # 0 --> out
+    N[out, r] = 1
+
+    r += 1
+    # reaction 70
+    # out --> 0
+    N[out, r] = -1
+
+    r += 1
+    # reaction 71
+    # out --> 0
+    N[out, r] = -1
+
+    """
+    # not I4: I4
+    """
+
+    r += 1
+    # reaction 67
+    # 0 --> L_I4
+    N[L_I4, r] = 1
+
+    r += 1
+    # reaction 68
+    # L_I4 --> 0
+    N[L_I4, r] = -1
+
+    r += 1
+    # reaction 69
+    # 0 --> out
+    N[out, r] = 1
+
+    r += 1
+    # reaction 70
+    # out --> 0
+    N[out, r] = -1
+
+    r += 1
+    # reaction 71
+    # out --> 0
+    N[out, r] = -1
+
+    """
+    # not I5: I5
+    """
+
+    r += 1
+    # reaction 67
+    # 0 --> L_I5
+    N[L_I5, r] = 1
+
+    r += 1
+    # reaction 68
+    # L_I5 --> 0
+    N[L_I5, r] = -1
+
+    r += 1
+    # reaction 69
+    # 0 --> out
+    N[out, r] = 1
+
+    r += 1
+    # reaction 70
+    # out --> 0
+    N[out, r] = -1
+
+    r += 1
+    # reaction 71
+    # out --> 0
+    N[out, r] = -1
+
+    """
+    # not I6: I6
+    """
+
+    r += 1
+    # reaction 67
+    # 0 --> L_I6
+    N[L_I6, r] = 1
+
+    r += 1
+    # reaction 68
+    # L_I6 --> 0
+    N[L_I6, r] = -1
+
+    r += 1
+    # reaction 69
+    # 0 --> out
+    N[out, r] = 1
+
+    r += 1
+    # reaction 70
+    # out --> 0
+    N[out, r] = -1
+
+    r += 1
+    # reaction 71
+    # out --> 0
+    N[out, r] = -1
+
+    """
+    # not I7: I7
+    """
+
+    r += 1
+    # reaction 67
+    # 0 --> L_I7
+    N[L_I7, r] = 1
+
+    r += 1
+    # reaction 68
+    # L_I7 --> 0
+    N[L_I7, r] = -1
+
+    r += 1
+    # reaction 69
+    # 0 --> out
+    N[out, r] = 1
+
+    r += 1
+    # reaction 70
+    # out --> 0
+    N[out, r] = -1
+
+    r += 1
+    # reaction 71
+    # out --> 0
+    N[out, r] = -1
+
+    return N
+
 def MUX_4_1_model_stochastic(state, params, Omega):
     delta_L, gamma_L_X, n_y, theta_L_X, eta_x, omega_x, m_x, delta_x, rho_x, gamma_x, theta_x, r_X = params
     params_yes = gamma_x, n_y, theta_x, delta_x, rho_x
@@ -1294,7 +2350,8 @@ def MUX_8_1_model_stochastic(state, params, Omega):
 
     I0, I1, I2, I3, I4, I5, I6, I7, S0, S1, S2 = state[:11]
     I0_out, I1_out, I2_out, I3_out, I4_out, I5_out, I6_out, I7_out = state[11:19]
-    L_I0_I0, L_I1_S2, L_I1_I1, L_I2_S1, L_I2_I2, L_I3_S1, L_I3_S2, L_I3_I3, L_I4_S0, L_I4_I4, L_I5_S0, L_I5_S2, L_I5_I5, L_I6_S0, L_I6_S1, L_I6_I6, L_I7_S0,\
+    L_I0_I0, L_I1_S2, L_I1_I1, L_I2_S1, L_I2_I2, L_I3_S1, L_I3_S2, L_I3_I3, L_I4_S0, L_I4_I4, L_I5_S0, \
+    L_I5_S2, L_I5_I5, L_I6_S0, L_I6_S1, L_I6_I6, L_I7_S0,\
     L_I7_S1, L_I7_S2, L_I7_I7,L_I0, L_I1, L_I2, L_I3, L_I4, L_I5, L_I6, L_I7 = state[19:47]
     N_I0_S0, N_I0_S1, N_I0_S2, N_I0_I0,\
     N_I1_S0, N_I1_S1, N_I1_S2, N_I1_I1,\
