@@ -1422,7 +1422,7 @@ def MUX_8_1_generate_stoichiometry():
     N[I2_out, r] = -1
 
     """
-    # yes S2: I1_S2 
+    # yes S2: I2_S2 
     """
     r += 1
     N[I2_out, r] = 1
@@ -1499,7 +1499,7 @@ def MUX_8_1_generate_stoichiometry():
     r += 1
     # reaction 44
     # 0 --> I3_out
-    N[L_I3_S1, r] = 1
+    N[I3_out, r] = 1
 
     r += 1
     # reaction 45
@@ -1528,7 +1528,7 @@ def MUX_8_1_generate_stoichiometry():
     r += 1
     # reaction 44
     # 0 --> I3_out
-    N[L_I3_S1, r] = 1
+    N[I3_out, r] = 1
 
     r += 1
     # reaction 45
