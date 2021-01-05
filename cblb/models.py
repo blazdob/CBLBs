@@ -3513,7 +3513,7 @@ def CLB_model_8_stochastic(state, params, Omega):
     #########
     # state
     I0, I1, I2, I3, I4, I5, I6, I7 = I0_a, I1_a, I2_a, I3_a, I4_a, I5_a, I6_a, I7_a
-    state_mux = np.append([I0, I1, I2, I3, I4, I5, I7, I7], state[48:], axis=0)
+    state_mux = np.append([I0, I1, I2, I3, I4, I5, I6, I7], state[48:], axis=0)
 
     ########
     # model
