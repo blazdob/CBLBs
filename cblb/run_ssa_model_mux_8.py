@@ -59,9 +59,9 @@ params = [delta_L, gamma_L_X, n_y, theta_L_X, eta_x, omega_x, m_x, delta_x, rho_
 # N_cells should be set to 1
 Omega = 10
 
-# I0, I1, I2, I3
+# I0, I1, I2, I3, I4, I5, I6, I7
 I = np.array([0, 0, 0, 0, 0, 1, 0, 0]) * 100
-# S0, S1
+# S0, S1, S2
 S = np.array([0, 1, 0])
 
 Y0 = np.zeros(88)
