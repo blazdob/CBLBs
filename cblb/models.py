@@ -2881,6 +2881,230 @@ def MUX_8_1_model_stochastic(state, params, Omega):
            p_I7_S0 + p_I7_S1 + p_I7_S2  + p_I7_I7 +
            p_I0 + p_I1 + p_I2 + p_I3 + p_I4 + p_I5 + p_I6 + p_I7 )
 
+def MUX_8_1_model_stochastic_v2(state, params, Omega):
+    delta_L, gamma_L_X, n_y, theta_L_X, eta_x, omega_x, m_x, delta_x, rho_x, gamma_x, theta_x, r_X = params
+    params_yes = gamma_x, n_y, theta_x, delta_x, rho_x
+    params_not = delta_L, gamma_L_X, n_y, theta_L_X, eta_x, omega_x, m_x, delta_x, rho_x
+
+    I0, I1, I2, I3, I4, I5, I6, I7, S0, S1, S2 = state[:11]
+    I0_out, I1_out, I2_out, I3_out, I4_out, I5_out, I6_out, I7_out = state[11:19]
+    L_I0_I0, L_I1_S0, L_I1_I1, L_I2_S1, L_I2_I2, L_I3_S0, L_I3_S1, L_I3_I3, L_I4_S2, L_I4_I4, L_I5_S0, L_I5_S2, L_I5_I5, L_I6_S1, L_I6_S2, L_I6_I6, L_I7_S0,\
+    L_I7_S1, L_I7_S2, L_I7_I7, L_I0, L_I1, L_I2, L_I3, L_I4, L_I5, L_I6, L_I7 = state[19:47]
+    N_I0_S0, N_I0_S1, N_I0_S2, N_I0_I0,\
+    N_I1_S0, N_I1_S1, N_I1_S2, N_I1_I1,\
+    N_I2_S0, N_I2_S1, N_I2_S2, N_I2_I2,\
+    N_I3_S0, N_I3_S1, N_I3_S2, N_I3_I3,\
+    N_I4_S0, N_I4_S1, N_I4_S2, N_I4_I4,\
+    N_I5_S0, N_I5_S1, N_I5_S2, N_I5_I5,\
+    N_I6_S0, N_I6_S1, N_I6_S2, N_I6_I6,\
+    N_I7_S0, N_I7_S1, N_I7_S2, N_I7_I7,\
+    N_I0, N_I1, N_I2, N_I3, N_I4, N_I5, N_I6, N_I7 = state[47:87]
+    out = state[87]
+    
+    """
+     I0
+    """
+    # yes S0: I0_S0
+    state_yes_I0_S0 = I0_out, S0, N_I0_S0, N_I0_S0
+    p_I0_S0 = yes_cell_stochastic(state_yes_I0_S0, params_yes, Omega)
+
+    # yes S1: I0_S1
+    state_yes_I0_S1 = I0_out, S1, N_I0_S1, N_I0_S1
+    p_I0_S1 = yes_cell_stochastic(state_yes_I0_S1, params_yes, Omega)
+
+    # yes S2: I0_S2
+    state_yes_I0_S2 = I0_out, S2, N_I0_S2, N_I0_S2
+    p_I0_S2 = yes_cell_stochastic(state_yes_I0_S2, params_yes, Omega)
+
+    # not I0: I0_I0
+    state_not_I0_I0 = L_I0_I0, I0_out, I0, N_I0_I0, N_I0_I0
+    p_I0_I0 = not_cell_stochastic(state_not_I0_I0, params_not, Omega)    
+    
+
+    """
+     I1
+    """
+    # not S0: I1_S0
+    state_not_I1_S0 = L_I1_S0, I1_out, S0, N_I1_S0, N_I1_S0
+    p_I1_S0 = not_cell_stochastic(state_not_I1_S0, params_not, Omega)
+    
+    # yes S1: I1_S1
+    state_yes_I1_S1 = I1_out, S1, N_I1_S1, N_I1_S1
+    p_I1_S1 = yes_cell_stochastic(state_yes_I1_S1, params_yes, Omega)
+
+    # yes S2: I1_S2
+    state_yes_I1_S2 = I1_out, S2, N_I1_S2, N_I1_S2
+    p_I1_S2 = yes_cell_stochastic(state_yes_I1_S2, params_yes, Omega)    
+    
+    # not I1: I1_I1
+    state_not_I1_I1 = L_I1_I1, I1_out, I1, N_I1_I1, N_I1_I1
+    p_I1_I1 = not_cell_stochastic(state_not_I1_I1, params_not, Omega)
+
+    """
+    I2
+    """
+    # yes S0: I2_S0
+    state_yes_I2_S0 = I2_out, S0, N_I2_S0, N_I2_S0
+    p_I2_S0 = yes_cell_stochastic(state_yes_I2_S0, params_yes, Omega)
+    
+    # not S1: I2_S1
+    state_not_I2_S1 = L_I2_S1, I2_out, S1, N_I2_S1, N_I2_S1
+    p_I2_S1 = not_cell_stochastic(state_not_I2_S1, params_not, Omega)    
+    
+    # yes S2: I2_S2
+    state_yes_I2_S2 = I2_out, S2, N_I2_S2, N_I2_S2
+    p_I2_S2 = yes_cell_stochastic(state_yes_I2_S2, params_yes, Omega)
+    
+    # not I2: I2_I2
+    state_not_I2_I2 = L_I2_I2, I2_out, I2, N_I2_I2, N_I2_I2
+    p_I2_I2 = not_cell_stochastic(state_not_I2_I2, params_not, Omega)
+
+    """
+    I3
+    """
+    # not S0: I3_S0
+    state_not_I3_S0 = L_I3_S0, I3_out, S0, N_I3_S0, N_I3_S0
+    p_I3_S0 = not_cell_stochastic(state_not_I3_S0, params_not, Omega)
+    
+    # not S1: I3_S1
+    state_not_I3_S1 = L_I3_S1, I3_out, S1, N_I3_S1, N_I3_S1
+    p_I3_S1 = not_cell_stochastic(state_not_I3_S1, params_not, Omega)    
+    
+    # yes S2: I3_S2
+    state_yes_I3_S2 = I3_out, S2, N_I3_S2, N_I3_S2
+    p_I3_S2 = yes_cell_stochastic(state_yes_I3_S2, params_yes, Omega)    
+    
+    # not I3: I3_I3
+    state_not_I3_I3 = L_I3_I3, I3_out, I3, N_I3_I3, N_I3_I3
+    p_I3_I3 = not_cell_stochastic(state_not_I3_I3, params_not, Omega)
+
+    """
+     I4
+    """
+    # yes S0: I4_S0
+    state_yes_I4_S0 = I4_out, S0, N_I4_S0, N_I4_S0
+    p_I4_S0 = yes_cell_stochastic(state_yes_I4_S0, params_yes, Omega)
+    
+
+    # yes S1: I4_S1
+    state_yes_I4_S1 = I4_out, S1, N_I4_S1, N_I4_S1
+    p_I4_S1 = yes_cell_stochastic(state_yes_I4_S1, params_yes, Omega)
+    
+
+    # not S2: I4_S2
+    state_not_I4_S2 = L_I4_S2, I4_out, S2, N_I4_S2, N_I4_S2
+    p_I4_S2 = not_cell_stochastic(state_not_I4_S2, params_not, Omega)
+    
+
+    # not I4: I4_I4
+    state_not_I4_I4 = L_I4_I4, I4_out, I4, N_I4_I4, N_I4_I4
+    p_I4_I4 = not_cell_stochastic(state_not_I4_I4, params_not, Omega)
+
+    """
+     I5
+    """
+    # not S0: I5_S0
+    state_not_I5_S0 = L_I5_S0, I5_out, S0, N_I5_S0, N_I5_S0
+    p_I5_S0 = not_cell_stochastic(state_not_I5_S0, params_not, Omega)    
+    
+    # yes S1: I5_S1
+    state_yes_I5_S1 = I5_out, S1, N_I5_S1, N_I5_S1
+    p_I5_S1 = yes_cell_stochastic(state_yes_I5_S1, params_yes, Omega)
+
+    # not S2: I5_S2
+    state_not_I5_S2 = L_I5_S2, I5_out, S2, N_I5_S2, N_I5_S2
+    p_I5_S2 = not_cell_stochastic(state_not_I5_S2, params_not, Omega)    
+
+    # not I5: I5_I5
+    state_not_I5_I5 = L_I5_I5, I5_out, I5, N_I5_I5, N_I5_I5
+    p_I5_I5 = not_cell_stochastic(state_not_I5_I5, params_not, Omega)
+
+    """
+    I6
+    """
+    # yes S0: I6_S0
+    state_yes_I6_S0 = I6_out, S0, N_I6_S0, N_I6_S0
+    p_I6_S0 = yes_cell_stochastic(state_yes_I6_S0, params_yes, Omega)    
+    
+
+    # not S1: I6_S1
+    state_not_I6_S1 = L_I6_S1, I6_out, S1, N_I6_S1, N_I6_S1
+    p_I6_S1 = not_cell_stochastic(state_not_I6_S1, params_not, Omega)    
+    
+
+    # not S2: I6_S2
+    state_not_I6_S2 = L_I6_S2, I6_out, S2, N_I6_S2, N_I6_S2
+    p_I6_S2 = not_cell_stochastic(state_not_I6_S2, params_not, Omega)
+
+    
+    # not I6: I6_I6
+    state_not_I6_I6 = L_I6_I6, I6_out, I6, N_I6_I6, N_I6_I6
+    p_I6_I6 = not_cell_stochastic(state_not_I6_I6, params_not, Omega)
+
+    """
+    I7
+    """
+    # not S0: I7_S0
+    state_not_I7_S0 = L_I7_S0, I7_out, S0, N_I7_S0, N_I7_S0
+    p_I7_S0 = not_cell_stochastic(state_not_I7_S0, params_not, Omega)    
+
+    # not S1: I7_S1
+    state_not_I7_S1 = L_I7_S1, I7_out, S1, N_I7_S1, N_I7_S1
+    p_I7_S1 = not_cell_stochastic(state_not_I7_S1, params_not, Omega)    
+
+    # not S2: I7_S2
+    state_not_I7_S2 = L_I7_S2, I7_out, S2, N_I7_S2, N_I7_S2
+    p_I7_S2 = not_cell_stochastic(state_not_I7_S2, params_not, Omega)    
+
+    # not I7: I7_I7
+    state_not_I7_I7 = L_I7_I7, I7_out, I7, N_I7_I7, N_I7_I7
+    p_I7_I7 = not_cell_stochastic(state_not_I7_I7, params_not, Omega)
+
+    """
+    out
+    """
+    # not I0: I0
+    state_not_I0 = L_I0, out, I0_out, N_I0, N_I0
+    p_I0 = not_cell_stochastic(state_not_I0, params_not, Omega)    
+      
+    # not I1: I1
+    state_not_I1 = L_I1, out, I1_out, N_I1, N_I1
+    p_I1 = not_cell_stochastic(state_not_I1, params_not, Omega)
+
+    # not I2: I2
+    state_not_I2 = L_I2, out, I2_out, N_I2, N_I2
+    p_I2 = not_cell_stochastic(state_not_I2, params_not, Omega) 
+
+    # not I3: I3
+    state_not_I3 = L_I3, out, I3_out, N_I3, N_I3
+    p_I3 = not_cell_stochastic(state_not_I3, params_not, Omega)    
+    
+    # not I4: I4
+    state_not_I4 = L_I4, out, I4_out, N_I4, N_I4
+    p_I4 = not_cell_stochastic(state_not_I4, params_not, Omega) 
+
+    # not I5: I5
+    state_not_I5 = L_I5, out, I5_out, N_I5, N_I5
+    p_I5 = not_cell_stochastic(state_not_I5, params_not, Omega) 
+
+    # not I6: I6
+    state_not_I6 = L_I6, out, I6_out, N_I6, N_I6
+    p_I6 = not_cell_stochastic(state_not_I6, params_not, Omega) 
+
+    # not I7: I7
+    state_not_I7 = L_I7, out, I7_out, N_I7, N_I7
+    p_I7 = not_cell_stochastic(state_not_I7, params_not, Omega) 
+
+    return (p_I0_S0 + p_I0_S1 + p_I0_S2 + p_I0_I0 + 
+           p_I1_S0 + p_I1_S1 + p_I1_S2  + p_I1_I1 +
+           p_I2_S0 + p_I2_S1 + p_I2_S2  + p_I2_I2 +
+           p_I3_S0 + p_I3_S1 + p_I3_S2  + p_I3_I3 +
+           p_I4_S0 + p_I4_S1 + p_I4_S2  + p_I4_I4 +
+           p_I5_S0 + p_I5_S1 + p_I5_S2  + p_I5_I5 +
+           p_I6_S0 + p_I6_S1 + p_I6_S2  + p_I6_I6 +
+           p_I7_S0 + p_I7_S1 + p_I7_S2  + p_I7_I7 +
+           p_I0 + p_I1 + p_I2 + p_I3 + p_I4 + p_I5 + p_I6 + p_I7)
+
 def CLB_generate_stoichiometry():
     N_toggle_IO = toggle_generate_stoichiometry()
     N_toggle_I1 = toggle_generate_stoichiometry()
@@ -3272,8 +3496,8 @@ def CLB_model_8_stochastic(state, params, Omega):
 
     ########
     # model
+    #p_mux = MUX_8_1_model_stochastic_v2(state_mux, params_mux, Omega)
     p_mux = MUX_8_1_model_stochastic(state_mux, params_mux, Omega)
-
     """
     return
     """
