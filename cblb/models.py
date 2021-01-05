@@ -1507,12 +1507,9 @@ def MUX_8_1_generate_stoichiometry():
     """
     # I0, I1, I2, I3, I4, I5, I6, I7, S0, S1, S2 = range(11)
     I0_out, I1_out, I2_out, I3_out, I4_out, I5_out, I6_out, I7_out = range(11, 19)
-    L_I0_I0, L_I1_S2, L_I1_I1, L_I2_S1, \
-    L_I2_I2, L_I3_S1, L_I3_S2, L_I3_I3, \
-    L_I4_S0, L_I4_I4, L_I5_S0, L_I5_S2, \
-    L_I5_I5, L_I6_S0, L_I6_S1, L_I6_I6, \
-    L_I7_S0, L_I7_S1, L_I7_S2, L_I7_I7, \
-    L_I0, L_I1, L_I2, L_I3, L_I4, L_I5, L_I6, L_I7 = range(19, 47)
+    L_I0_I0, L_I1_S0, L_I1_I1, L_I2_S1, L_I2_I2, L_I3_S0, L_I3_S1, L_I3_I3, L_I4_S2,\
+    L_I4_I4, L_I5_S0, L_I5_S2, L_I5_I5, L_I6_S1, L_I6_S2, L_I6_I6, L_I7_S0, \
+    L_I7_S1, L_I7_S2, L_I7_I7, L_I0, L_I1, L_I2, L_I3, L_I4, L_I5, L_I6, L_I7 = range(19, 47)
     #N_I0_S0, N_I0_S1, N_I0_S2, N_I0_I0, N_I1_S0, N_I1_S1, N_I1_S2, N_I1_I1, N_I2_S0, N_I2_S1, N_I2_S2, N_I2_I2, N_I3_S0, N_I3_S1, N_I3_S2, N_I3_I3,  N_I4_S0, N_I4_S1, N_I4_S2, N_I4_I4, N_I5_S0, N_I5_S1, N_I5_S2, N_I5_I5, N_I6_S0, N_I6_S1, N_I6_S2, N_I6_I6, N_I7_S0, N_I7_S1, N_I7_S2, N_I7_I7, N_I0, N_I1, N_I2, N_I3, N_I4, N_I5, N_I6, N_I7 = range(47,86)
     out = 87
 
@@ -1562,14 +1559,17 @@ def MUX_8_1_generate_stoichiometry():
     """
     # yes S2: I0_S2
     """
+    # reaction 6
     r += 1
     # 0 --> I0_out
     N[I0_out, r] = 1
 
+    # reaction 7
     r += 1
     # I0_out --> 0
     N[I0_out, r] = -1
 
+    # reaction 8
     r += 1
     # I0_out --> 0
     N[I0_out, r] = -1
@@ -1579,49 +1579,42 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 6
+    # reaction 9
     # 0 --> L_I0_I0
     N[L_I0_I0, r] = 1
 
     r += 1
-    # reaction 7
+    # reaction 10
     # L_I0_I0 --> 0
     N[L_I0_I0, r] = -1
 
     r += 1
-    # reaction 8
+    # reaction 11
     # 0 --> I0_out
     N[I0_out, r] = 1
 
     r += 1
-    # reaction 9
+    # reaction 12
     # I0_out --> 0
     N[I0_out, r] = -1
 
     r += 1
-    # reaction 10
+    # reaction 13
     # I0_out --> 0
     N[I0_out, r] = -1
 
     """
-    # yes S0: I1_S0
+    # not S0: I1_S0
     """
     r += 1
-    # 0 --> I1_out
-    N[I1_out, r] = 1
+    # reaction 14
+    # 0 --> L_I1_S0
+    N[L_I1_S0, r] = 1
 
     r += 1
-    # I1_out --> 0
-    N[I1_out, r] = -1
-
-    r += 1
-    # I1_out --> 0
-    N[I1_out, r] = -1
-
-
-    """
-    # yes S1: I1_S1
-    """
+    # reaction 15
+    # L_I1_S0 --> 0
+    N[L_I1_S0, r] = -1
 
     r += 1
     # reaction 16
@@ -1638,22 +1631,43 @@ def MUX_8_1_generate_stoichiometry():
     # I1_out --> 0
     N[I1_out, r] = -1
 
+
     """
-    # not S2: I1_S2
+    # yes S1: I1_S1
     """
-    r += 1
-    N[L_I1_S2, r] = 1
 
     r += 1
-    N[L_I1_S2, r] = -1
-
-    r += 1
+    # reaction 19
+    # 0 --> I1_out
     N[I1_out, r] = 1
 
     r += 1
+    # reaction 20
+    # I1_out --> 0
     N[I1_out, r] = -1
 
     r += 1
+    # reaction 21
+    # I1_out --> 0
+    N[I1_out, r] = -1
+
+    """
+    # yes S2: I1_S2
+    """
+
+    r += 1
+    # reaction 22
+    # 0 --> I1_out
+    N[I1_out, r] = 1
+
+    r += 1
+    # reaction 23
+    # I1_out --> 0
+    N[I1_out, r] = -1
+
+    r += 1
+    # reaction 24
+    # I1_out --> 0
     N[I1_out, r] = -1
 
     """
@@ -1661,22 +1675,22 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 19
+    # reaction 25
     # 0 --> L_I1_I1
     N[L_I1_I1, r] = 1
 
     r += 1
-    # reaction 20
+    # reaction 26
     # L_I1_I1 --> 0
     N[L_I1_I1, r] = -1
 
     r += 1
-    # reaction 21
+    # reaction 27
     # 0 --> I1_out
     N[I1_out, r] = 1
 
     r += 1
-    # reaction 22
+    # reaction 28
     # I1_out --> 0
     N[I1_out, r] = -1
 
@@ -1736,13 +1750,20 @@ def MUX_8_1_generate_stoichiometry():
     """
     # yes S2: I2_S2 
     """
+
     r += 1
+    # reaction 32
+    # 0 --> I2_out
     N[I2_out, r] = 1
 
     r += 1
+    # reaction 33
+    # I2_out --> 0
     N[I2_out, r] = -1
 
     r += 1
+    # reaction 34
+    # I2_out --> 0
     N[I2_out, r] = -1
 
     """
@@ -1750,46 +1771,56 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 32
+    # reaction 35
     # 0 --> L_I2_I2
     N[L_I2_I2, r] = 1
 
     r += 1
-    # reaction 33
+    # reaction 36
     # L_I2_I2 --> 0
     N[L_I2_I2, r] = -1
 
     r += 1
-    # reaction 34
+    # reaction 37
     # 0 --> I2_out
     N[I2_out, r] = 1
 
     r += 1
-    # reaction 35
+    # reaction 38
     # I2_out --> 0
     N[I2_out, r] = -1
 
     r += 1
-    # reaction 36
+    # reaction 39
     # I2_out --> 0
     N[I2_out, r] = -1
 
     """ 
-    # yes S0: I3_S0
+    # not S0: I3_S0
     """
 
     r += 1
-    # reaction 37
+    # reaction 40
+    # 0 --> L_I3_S0
+    N[L_I3_S0, r] = 1
+
+    r += 1
+    # reaction 41
+    # L_I3_S0 --> 0
+    N[L_I3_S0, r] = -1
+
+    r += 1
+    # reaction 42
     # 0 --> I3_out
     N[I3_out, r] = 1
 
     r += 1
-    # reaction 38
+    # reaction 43
     # I3_out --> 0
     N[I3_out, r] = -1
 
     r += 1
-    # reaction 39
+    # reaction 44
     # I3_out --> 0
     N[I3_out, r] = -1
 
@@ -1799,56 +1830,46 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 42
+    # reaction 45
     # 0 --> L_I3_S1
     N[L_I3_S1, r] = 1
 
     r += 1
-    # reaction 43
+    # reaction 46
     # L_I3_S1 --> 0
     N[L_I3_S1, r] = -1
 
     r += 1
-    # reaction 44
+    # reaction 47
     # 0 --> I3_out
     N[I3_out, r] = 1
 
     r += 1
-    # reaction 45
+    # reaction 48
     # I3_out --> 0
     N[I3_out, r] = -1
 
     r += 1
-    # reaction 46
+    # reaction 49
     # I3_out --> 0
     N[I3_out, r] = -1
 
     """
-    # not S2: I3_S2
+    # yes S2: I3_S2
     """
 
     r += 1
-    # reaction 42
-    # 0 --> L_I3_S2
-    N[L_I3_S1, r] = 1
-
-    r += 1
-    # reaction 43
-    # L_I3_S2 --> 0
-    N[L_I3_S1, r] = -1
-
-    r += 1
-    # reaction 44
+    # reaction 50
     # 0 --> I3_out
     N[I3_out, r] = 1
 
     r += 1
-    # reaction 45
+    # reaction 51
     # I3_out --> 0
     N[I3_out, r] = -1
 
     r += 1
-    # reaction 46
+    # reaction 52
     # I3_out --> 0
     N[I3_out, r] = -1
 
@@ -1857,56 +1878,46 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 47
+    # reaction 53
     # 0 --> L_I3_I3
     N[L_I3_I3, r] = 1
 
     r += 1
-    # reaction 48
+    # reaction 54
     # L_I3_I3 --> 0
     N[L_I3_I3, r] = -1
 
     r += 1
-    # reaction 49
+    # reaction 55
     # 0 --> I3_out
     N[I3_out, r] = 1
 
     r += 1
-    # reaction 50
+    # reaction 56
     # I3_out --> 0
     N[I3_out, r] = -1
 
     r += 1
-    # reaction 51
+    # reaction 57
     # I3_out --> 0
     N[I3_out, r] = -1
 
     """
-    # not S0: I4_S0
+    # yes S0: I4_S0
     """
 
     r += 1
-    # reaction 47
-    # 0 --> L_I4_S0
-    N[L_I4_S0, r] = 1
-
-    r += 1
-    # reaction 48
-    # L_I4_S0 --> 0
-    N[L_I4_S0, r] = -1
-
-    r += 1
-    # reaction 49
+    # reaction 58
     # 0 --> I4_out
     N[I4_out, r] = 1
 
     r += 1
-    # reaction 50
+    # reaction 59
     # I4_out --> 0
     N[I4_out, r] = -1
 
     r += 1
-    # reaction 51
+    # reaction 60
     # I4_out --> 0
     N[I4_out, r] = -1
 
@@ -1915,36 +1926,46 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 37
+    # reaction 61
     # 0 --> I4_out
     N[I4_out, r] = 1
 
     r += 1
-    # reaction 38
+    # reaction 62
     # I4_out --> 0
     N[I4_out, r] = -1
 
     r += 1
-    # reaction 39
+    # reaction 63
     # I4_out --> 0
     N[I4_out, r] = -1
 
     """ 
-    # yes S2: I4_S2
+    # not S2: I4_S2
     """
 
     r += 1
-    # reaction 37
+    # reaction 64
+    # 0 --> L_I4_S2
+    N[L_I4_S2, r] = 1
+
+    r += 1
+    # reaction 65
+    # L_I4_S2 --> 0
+    N[L_I4_S2, r] = -1
+
+    r += 1
+    # reaction 66
     # 0 --> I4_out
     N[I4_out, r] = 1
 
     r += 1
-    # reaction 38
+    # reaction 67
     # I4_out --> 0
     N[I4_out, r] = -1
 
     r += 1
-    # reaction 39
+    # reaction 68
     # I4_out --> 0
     N[I4_out, r] = -1
 
@@ -1953,27 +1974,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 47
+    # reaction 69
     # 0 --> L_I4_I4
     N[L_I4_I4, r] = 1
 
     r += 1
-    # reaction 48
+    # reaction 70
     # L_I4_I4 --> 0
     N[L_I4_I4, r] = -1
 
     r += 1
-    # reaction 49
+    # reaction 71
     # 0 --> I4_out
     N[I4_out, r] = 1
 
     r += 1
-    # reaction 50
+    # reaction 72
     # I4_out --> 0
     N[I4_out, r] = -1
 
     r += 1
-    # reaction 51
+    # reaction 73
     # I4_out --> 0
     N[I4_out, r] = -1
 
@@ -1982,27 +2003,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 47
+    # reaction 74
     # 0 --> L_I5_S0
     N[L_I5_S0, r] = 1
 
     r += 1
-    # reaction 48
+    # reaction 75
     # L_I5_S0 --> 0
     N[L_I5_S0, r] = -1
 
     r += 1
-    # reaction 49
+    # reaction 76
     # 0 --> I5_out
     N[I5_out, r] = 1
 
     r += 1
-    # reaction 50
+    # reaction 77
     # I5_out --> 0
     N[I5_out, r] = -1
 
     r += 1
-    # reaction 51
+    # reaction 78
     # I5_out --> 0
     N[I5_out, r] = -1
 
@@ -2011,17 +2032,17 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 37
+    # reaction 79
     # 0 --> I5_out
     N[I5_out, r] = 1
 
     r += 1
-    # reaction 38
+    # reaction 80
     # I5_out --> 0
     N[I5_out, r] = -1
 
     r += 1
-    # reaction 39
+    # reaction 81
     # I5_out --> 0
     N[I5_out, r] = -1
 
@@ -2030,27 +2051,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 47
+    # reaction 82
     # 0 --> L_I5_S2
     N[L_I5_S2, r] = 1
 
     r += 1
-    # reaction 48
+    # reaction 83
     # L_I5_S2 --> 0
     N[L_I5_S2, r] = -1
 
     r += 1
-    # reaction 49
+    # reaction 84
     # 0 --> I5_out
     N[I5_out, r] = 1
 
     r += 1
-    # reaction 50
+    # reaction 85
     # I5_out --> 0
     N[I5_out, r] = -1
 
     r += 1
-    # reaction 51
+    # reaction 86
     # I5_out --> 0
     N[I5_out, r] = -1
 
@@ -2059,56 +2080,46 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 47
+    # reaction 87
     # 0 --> L_I5_I5
     N[L_I5_I5, r] = 1
 
     r += 1
-    # reaction 48
+    # reaction 88
     # L_I5_I5 --> 0
     N[L_I5_I5, r] = -1
 
     r += 1
-    # reaction 49
+    # reaction 89
     # 0 --> I5_out
     N[I5_out, r] = 1
 
     r += 1
-    # reaction 50
+    # reaction 90
     # I5_out --> 0
     N[I5_out, r] = -1
 
     r += 1
-    # reaction 51
+    # reaction 91
     # I5_out --> 0
     N[I5_out, r] = -1
 
     """
-    # not S0: I6_S0
+    # yes S0: I6_S0
     """
 
     r += 1
-    # reaction 47
-    # 0 --> L_I6_S0
-    N[L_I6_S0, r] = 1
-
-    r += 1
-    # reaction 48
-    # L_I6_S0 --> 0
-    N[L_I6_S0, r] = -1
-
-    r += 1
-    # reaction 49
+    # reaction 92
     # 0 --> I6_out
     N[I6_out, r] = 1
 
     r += 1
-    # reaction 50
+    # reaction 93
     # I6_out --> 0
     N[I6_out, r] = -1
 
     r += 1
-    # reaction 51
+    # reaction 94
     # I6_out --> 0
     N[I6_out, r] = -1
 
@@ -2117,46 +2128,56 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 47
+    # reaction 95
     # 0 --> L_I6_S1
     N[L_I6_S1, r] = 1
 
     r += 1
-    # reaction 48
+    # reaction 96
     # L_I6_S1 --> 0
     N[L_I6_S1, r] = -1
 
     r += 1
-    # reaction 49
+    # reaction 97
     # 0 --> I6_out
     N[I6_out, r] = 1
 
     r += 1
-    # reaction 50
+    # reaction 98
     # I6_out --> 0
     N[I6_out, r] = -1
 
     r += 1
-    # reaction 51
+    # reaction 99
     # I6_out --> 0
     N[I6_out, r] = -1
 
     """ 
-    # yes S2: I6_S2
+    # not S2: I6_S2
     """
 
     r += 1
-    # reaction 37
+    # reaction 100
+    # 0 --> L_I6_S2
+    N[L_I6_S2, r] = 1
+
+    r += 1
+    # reaction 101
+    # L_I6_S2 --> 0
+    N[L_I6_S2, r] = -1
+
+    r += 1
+    # reaction 102
     # 0 --> I6_out
     N[I6_out, r] = 1
 
     r += 1
-    # reaction 38
+    # reaction 103
     # I6_out --> 0
     N[I6_out, r] = -1
 
     r += 1
-    # reaction 39
+    # reaction 104
     # I6_out --> 0
     N[I6_out, r] = -1
 
@@ -2165,27 +2186,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 47
+    # reaction 105
     # 0 --> L_I6_I6
     N[L_I6_I6, r] = 1
 
     r += 1
-    # reaction 48
+    # reaction 106
     # L_I6_I6 --> 0
     N[L_I6_I6, r] = -1
 
     r += 1
-    # reaction 49
+    # reaction 107
     # 0 --> I6_out
     N[I6_out, r] = 1
 
     r += 1
-    # reaction 50
+    # reaction 108
     # I6_out --> 0
     N[I6_out, r] = -1
 
     r += 1
-    # reaction 51
+    # reaction 109
     # I6_out --> 0
     N[I6_out, r] = -1
 
@@ -2194,27 +2215,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 47
+    # reaction 110
     # 0 --> L_I7_S0
     N[L_I7_S0, r] = 1
 
     r += 1
-    # reaction 48
+    # reaction 111
     # L_I7_S0 --> 0
     N[L_I7_S0, r] = -1
 
     r += 1
-    # reaction 49
+    # reaction 112
     # 0 --> I7_out
     N[I7_out, r] = 1
 
     r += 1
-    # reaction 50
+    # reaction 113
     # I7_out --> 0
     N[I7_out, r] = -1
 
     r += 1
-    # reaction 51
+    # reaction 114
     # I7_out --> 0
     N[I7_out, r] = -1
 
@@ -2223,27 +2244,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 47
+    # reaction 115
     # 0 --> L_I7_S1
     N[L_I7_S1, r] = 1
 
     r += 1
-    # reaction 48
+    # reaction 116
     # L_I7_S1 --> 0
     N[L_I7_S1, r] = -1
 
     r += 1
-    # reaction 49
+    # reaction 117
     # 0 --> I7_out
     N[I7_out, r] = 1
 
     r += 1
-    # reaction 50
+    # reaction 118
     # I7_out --> 0
     N[I7_out, r] = -1
 
     r += 1
-    # reaction 51
+    # reaction 119
     # I7_out --> 0
     N[I7_out, r] = -1
 
@@ -2252,27 +2273,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 47
-    # 0 --> L_I7_S1
+    # reaction 120
+    # 0 --> L_I7_S2
     N[L_I7_S2, r] = 1
 
     r += 1
-    # reaction 48
-    # L_I7_S1 --> 0
+    # reaction 121
+    # L_I7_S2 --> 0
     N[L_I7_S2, r] = -1
 
     r += 1
-    # reaction 49
+    # reaction 122
     # 0 --> I7_out
     N[I7_out, r] = 1
 
     r += 1
-    # reaction 50
+    # reaction 123
     # I7_out --> 0
     N[I7_out, r] = -1
 
     r += 1
-    # reaction 51
+    # reaction 124
     # I7_out --> 0
     N[I7_out, r] = -1
 
@@ -2281,27 +2302,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 47
+    # reaction 125
     # 0 --> L_I7_I7
     N[L_I7_I7, r] = 1
 
     r += 1
-    # reaction 48
+    # reaction 126
     # L_I7_I7 --> 0
     N[L_I7_I7, r] = -1
 
     r += 1
-    # reaction 49
+    # reaction 127
     # 0 --> I7_out
     N[I7_out, r] = 1
 
     r += 1
-    # reaction 50
+    # reaction 128
     # I7_out --> 0
     N[I7_out, r] = -1
 
     r += 1
-    # reaction 51
+    # reaction 129
     # I7_out --> 0
     N[I7_out, r] = -1
 
@@ -2310,27 +2331,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 52
+    # reaction 130
     # 0 --> L_I0
     N[L_I0, r] = 1
 
     r += 1
-    # reaction 53
+    # reaction 131
     # L_I0 --> 0
     N[L_I0, r] = -1
 
     r += 1
-    # reaction 54
+    # reaction 132
     # 0 --> out
     N[out, r] = 1
 
     r += 1
-    # reaction 55
+    # reaction 133
     # out --> 0
     N[out, r] = -1
 
     r += 1
-    # reaction 56
+    # reaction 134
     # out --> 0
     N[out, r] = -1
 
@@ -2339,27 +2360,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 57
+    # reaction 135
     # 0 --> L_I1
     N[L_I1, r] = 1
 
     r += 1
-    # reaction 58
+    # reaction 136
     # L_I1 --> 0
     N[L_I1, r] = -1
 
     r += 1
-    # reaction 59
+    # reaction 137
     # 0 --> out
     N[out, r] = 1
 
     r += 1
-    # reaction 60
+    # reaction 138
     # out --> 0
     N[out, r] = -1
 
     r += 1
-    # reaction 61
+    # reaction 139
     # out --> 0
     N[out, r] = -1
 
@@ -2368,27 +2389,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 62
+    # reaction 140
     # 0 --> L_I2
     N[L_I2, r] = 1
 
     r += 1
-    # reaction 63
+    # reaction 141
     # L_I2 --> 0
     N[L_I2, r] = -1
 
     r += 1
-    # reaction 64
+    # reaction 142
     # 0 --> out
     N[out, r] = 1
 
     r += 1
-    # reaction 65
+    # reaction 143
     # out --> 0
     N[out, r] = -1
 
     r += 1
-    # reaction 66
+    # reaction 144
     # out --> 0
     N[out, r] = -1
 
@@ -2397,27 +2418,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 67
+    # reaction 145
     # 0 --> L_I3
     N[L_I3, r] = 1
 
     r += 1
-    # reaction 68
+    # reaction 146
     # L_I3 --> 0
     N[L_I3, r] = -1
 
     r += 1
-    # reaction 69
+    # reaction 147
     # 0 --> out
     N[out, r] = 1
 
     r += 1
-    # reaction 70
+    # reaction 148
     # out --> 0
     N[out, r] = -1
 
     r += 1
-    # reaction 71
+    # reaction 149
     # out --> 0
     N[out, r] = -1
 
@@ -2426,27 +2447,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 67
+    # reaction 150
     # 0 --> L_I4
     N[L_I4, r] = 1
 
     r += 1
-    # reaction 68
+    # reaction 151
     # L_I4 --> 0
     N[L_I4, r] = -1
 
     r += 1
-    # reaction 69
+    # reaction 152
     # 0 --> out
     N[out, r] = 1
 
     r += 1
-    # reaction 70
+    # reaction 153
     # out --> 0
     N[out, r] = -1
 
     r += 1
-    # reaction 71
+    # reaction 154
     # out --> 0
     N[out, r] = -1
 
@@ -2455,27 +2476,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 67
+    # reaction 155
     # 0 --> L_I5
     N[L_I5, r] = 1
 
     r += 1
-    # reaction 68
+    # reaction 156
     # L_I5 --> 0
     N[L_I5, r] = -1
 
     r += 1
-    # reaction 69
+    # reaction 157
     # 0 --> out
     N[out, r] = 1
 
     r += 1
-    # reaction 70
+    # reaction 158
     # out --> 0
     N[out, r] = -1
 
     r += 1
-    # reaction 71
+    # reaction 159
     # out --> 0
     N[out, r] = -1
 
@@ -2484,27 +2505,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 67
+    # reaction 160
     # 0 --> L_I6
     N[L_I6, r] = 1
 
     r += 1
-    # reaction 68
+    # reaction 161
     # L_I6 --> 0
     N[L_I6, r] = -1
 
     r += 1
-    # reaction 69
+    # reaction 162
     # 0 --> out
     N[out, r] = 1
 
     r += 1
-    # reaction 70
+    # reaction 163
     # out --> 0
     N[out, r] = -1
 
     r += 1
-    # reaction 71
+    # reaction 164
     # out --> 0
     N[out, r] = -1
 
@@ -2513,27 +2534,27 @@ def MUX_8_1_generate_stoichiometry():
     """
 
     r += 1
-    # reaction 67
+    # reaction 165
     # 0 --> L_I7
     N[L_I7, r] = 1
 
     r += 1
-    # reaction 68
+    # reaction 166
     # L_I7 --> 0
     N[L_I7, r] = -1
 
     r += 1
-    # reaction 69
+    # reaction 167
     # 0 --> out
     N[out, r] = 1
 
     r += 1
-    # reaction 70
+    # reaction 168
     # out --> 0
     N[out, r] = -1
 
     r += 1
-    # reaction 71
+    # reaction 169
     # out --> 0
     N[out, r] = -1
 
@@ -3497,7 +3518,7 @@ def CLB_model_8_stochastic(state, params, Omega):
     ########
     # model
     #p_mux = MUX_8_1_model_stochastic_v2(state_mux, params_mux, Omega)
-    p_mux = MUX_8_1_model_stochastic(state_mux, params_mux, Omega)
+    p_mux = MUX_8_1_model_stochastic_v2(state_mux, params_mux, Omega)
     """
     return
     """
