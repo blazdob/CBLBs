@@ -3090,7 +3090,7 @@ def CLB_model_8(state, T, params):
     state_mux = np.append([I0, I1, I2, I3, I4, I5, I6, I7], state[48:], axis=0)
 
     # model
-    dstate_mux = MUX_8_1_model(state_mux, T, params_mux)
+    dstate_mux = MUX_8_1_model_v2(state_mux, T, params_mux)
     dstate_mux = dstate_mux[8:] # ignore dI0, dI1, dI2, dI3, dI4, dI5, dI6, dI7
 
     """
@@ -3300,7 +3300,7 @@ def MUX_4_1_model_ODE(T, state, params):
     return MUX_4_1_model(state, T, params)
 
 def MUX_8_1_model_ODE(T, state, params):
-    return MUX_8_1_model(state, T, params)    
+    return MUX_8_1_model_v2(state, T, params)
 
 def CLB_model_ODE(T, state, params):
     return CLB_model(state, T, params)
