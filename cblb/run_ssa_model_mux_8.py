@@ -27,7 +27,7 @@ def simulate_stochastic_mux_8(params, Y0, Omega, T_end, dt=1):
         r1 = r[0]
         r2 = r[1]
 
-        a = MUX_8_1_model_stochastic_v2(state, params, Omega)
+        a = MUX_8_1_model_stochastic(state, params, Omega)
 
         asum = np.cumsum(a)
         a0 = np.sum(a)
